@@ -8,6 +8,8 @@
 
 **Duration:** July to August 2024
 
+**Mentor:** N.Santhosh Kumar
+
 
 ## Overview of the project
 
