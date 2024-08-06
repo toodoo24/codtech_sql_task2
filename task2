@@ -1,0 +1,76 @@
+/*create table for books*/
+
+create table books(book_id int primary key AUTO_INCREMENT,
+title varchar(30)not null,
+author varchar(30)not null,
+genre varchar(30)not null,
+published_year YEAR,
+available_copies int default 1);
+
+/*create table for members*/
+
+create table members(member_id int primary key AUTO_INCREMENT,
+first_name varchar(50)not null,
+second_name varchar(50)not null,
+email varchar(100)unique not null,
+join_date date);
+
+/*create table for transactions*/
+
+create table transactions(transactions_id int primary key AUTO_INCREMENT,
+book_id int not null,
+member_id int not null,
+borrow_date date not null,
+return_date date not null,
+foreign key (book_id) references books(book_id) on delete cascade,
+foreign key (member_id) references members(member_id)on delete cascade);
+
+/*insert data into the books*/
+
+insert into books( title, author, genre, published_year, available_copies)
+values( 'love story', 'vignesh', 'love', 2023, 24);
+
+/*insert data into the members*/
+
+insert into members(first_name, second_name, email, join_date)
+values('surya', 'shankar', 'suryashankar@gmail.com', '2022-10-30');
+
+/*insert data into the transactions*/
+
+insert into transactions(book_id, member_id,borrow_date, return_date)
+values(1,1,'2024-07-24','2024-08-12');
+
+/*retrive all the books*/
+
+select* from books;
+
+/*retrive all the members*/
+select* from members;
+
+/*retrive all the transactions*/
+
+select* from transactions;
+
+/*update no of available_copies*/
+
+update books
+set available_copies=21 
+where book_id = 1;
+
+/*update the return_date*/
+
+update transactions
+set return_date= '2024-08-30'
+where transactions_id=1;
+
+/* retrive some particular data*/
+
+select b.book_id,b.title,t.borrow_date, t.return_date ,b.available_copies
+from transactions t
+join books b on t.book_id = b.book_id
+where t.member_id = 1;
+
+/*delete a book*/
+
+DELETE FROM books 
+WHERE book_id = 1;
